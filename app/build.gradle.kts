@@ -38,7 +38,7 @@ android {
     }
     testOptions {
         unitTests.all {
-            testLogging {
+            it.testLogging {
                 events("passed", "failed", "skipped", "standardOut", "standardError")
             }
         }
