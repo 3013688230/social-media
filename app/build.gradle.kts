@@ -36,6 +36,13 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    testOptions {
+        unitTests.all {
+            testLogging {
+                events("passed", "failed", "skipped", "standardOut", "standardError")
+            }
+        }
+    }
 }
 
 dependencies {
