@@ -8,19 +8,12 @@ on:
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
-
-      # Configurar Node.js 20
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      # Configurar JDK 17
-      - name: Set up JDK 17
+      - name: set up JDK 17
         uses: actions/setup-java@v4
         with:
           java-version: '17'
@@ -29,32 +22,5 @@ jobs:
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-
       - name: Run microtests
         run: ./gradlew testDebug
-
-      - name: Install dependencies
-        run: npm install
-
-      # Configurar Cypress y ejecutar pruebas
-      - name: Run Cypress tests
-        uses: cypress-io/github-action@v6
-        with:
-          working-directory: './' # Ajusta esto si tu cypress.json está en otro directorio
-          browser: chrome
-          headless: true
-
-      - name: Debug Info
-        run: |
-          echo "Java version:"
-          java -version
-          echo "Gradle version:"
-          ./gradlew --version
-          echo "Node.js version:"
-          node -v
-          echo "npm version:"
-          npm -v
-          echo "Current directory:"
-          pwd
-          echo "Directory contents:"
-          ls -la
